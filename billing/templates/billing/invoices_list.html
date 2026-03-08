@@ -1,0 +1,148 @@
+{% extends "billing/base.html" %}
+
+{% block title %}Invoices - Laskora{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:28px;
+        gap:16px;
+        flex-wrap:wrap;
+    }
+
+    .page-title{
+        font-size:36px;
+        font-weight:800;
+        color:#1e293b;
+        margin:0;
+    }
+
+    .create-btn{
+        display:inline-block;
+        background:#2563eb;
+        color:white;
+        text-decoration:none;
+        padding:12px 18px;
+        border-radius:12px;
+        font-weight:700;
+        font-size:14px;
+    }
+
+    .table-card{
+        background:white;
+        border-radius:18px;
+        padding:24px;
+        box-shadow:0 10px 30px rgba(0,0,0,0.06);
+        overflow-x:auto;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+    }
+
+    th, td{
+        text-align:left;
+        padding:14px 10px;
+        border-bottom:1px solid #e2e8f0;
+        font-size:14px;
+        vertical-align:middle;
+    }
+
+    th{
+        color:#64748b;
+        font-weight:700;
+    }
+
+    td{
+        color:#334155;
+    }
+
+    .actions{
+        display:flex;
+        gap:12px;
+        flex-wrap:wrap;
+    }
+
+    .actions a{
+        text-decoration:none;
+        font-weight:700;
+        font-size:13px;
+    }
+
+    .pdf{
+        color:#2563eb;
+    }
+
+    .send{
+        color:#0f766e;
+    }
+
+    .edit{
+        color:#7c3aed;
+    }
+
+    .delete{
+        color:#dc2626;
+    }
+
+    .empty{
+        color:#94a3b8;
+        font-size:15px;
+    }
+
+    @media (max-width: 900px){
+        .page-title{
+            font-size:30px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Invoices</h1>
+    <a href="/create-invoice/" class="create-btn">+ Create Invoice</a>
+</div>
+
+<div class="table-card">
+    {% if invoices %}
+    <table>
+        <thead>
+            <tr>
+                <th>Invoice Number</th>
+                <th>Client</th>
+                <th>Total</th>
+                <th>Issue Date</th>
+                <th>Due Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for invoice in invoices %}
+            <tr>
+                <td>{{ invoice.invoice_number }}</td>
+                <td>{{ invoice.client }}</td>
+                <td>€{{ invoice.total }}</td>
+                <td>{{ invoice.issue_date }}</td>
+                <td>{{ invoice.due_date }}</td>
+                <td>
+                    <div class="actions">
+                        <a class="pdf" href="/invoice/{{ invoice.id }}/pdf/">PDF</a>
+                        <a class="send" href="/invoice/{{ invoice.id }}/send/">Send</a>
+                        <a class="edit" href="/invoice/{{ invoice.id }}/edit/">Edit</a>
+                        <a class="delete" href="/invoice/{{ invoice.id }}/delete/" onclick="return confirm('Delete this invoice?')">Delete</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div class="empty">No invoices found.</div>
+    {% endif %}
+</div>
+{% endblock %}

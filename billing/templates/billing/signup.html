@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Laskora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body{
+            margin:0;
+            font-family:'Inter', sans-serif;
+            background:#f8fafc;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+        }
+
+        .card{
+            width:100%;
+            max-width:420px;
+            background:white;
+            padding:32px;
+            border-radius:18px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        h1{
+            margin:0 0 10px 0;
+            font-size:32px;
+            color:#1e293b;
+        }
+
+        p{
+            margin:0 0 24px 0;
+            color:#64748b;
+            font-size:15px;
+        }
+
+        form p{
+            margin-bottom:16px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:6px;
+            font-size:14px;
+            font-weight:600;
+            color:#475569;
+        }
+
+        input{
+            width:100%;
+            padding:12px 14px;
+            border:1px solid #dbe2ea;
+            border-radius:12px;
+            font-size:15px;
+            box-sizing:border-box;
+        }
+
+        button{
+            width:100%;
+            padding:13px 18px;
+            border:none;
+            border-radius:12px;
+            background:#2563eb;
+            color:white;
+            font-size:15px;
+            font-weight:600;
+            cursor:pointer;
+            margin-top:10px;
+        }
+
+        .link{
+            margin-top:18px;
+            text-align:center;
+            font-size:14px;
+            color:#64748b;
+        }
+
+        .link a{
+            color:#2563eb;
+            text-decoration:none;
+            font-weight:600;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Create account</h1>
+        <p>Start using Laskora to create and send invoices.</p>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <div class="link">
+            Already have an account?
+            <a href="/login/">Login</a>
+        </div>
+    </div>
+</body>
+</html>

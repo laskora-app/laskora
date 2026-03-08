@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Laskora{% endblock %}</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            font-family:'Inter', sans-serif;
+            background:#f8fafc;
+            color:#1e293b;
+        }
+
+        .navbar{
+            background:white;
+            border-bottom:1px solid #e2e8f0;
+            padding:14px 32px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            position:sticky;
+            top:0;
+            z-index:100;
+        }
+
+        .nav-left{
+            display:flex;
+            align-items:center;
+            gap:24px;
+        }
+
+        .nav-logo img{
+            height:42px;
+            display:block;
+        }
+
+        .nav-links{
+            display:flex;
+            gap:18px;
+            align-items:center;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:#475569;
+            font-weight:600;
+            font-size:14px;
+        }
+
+        .nav-links a:hover{
+            color:#2563eb;
+        }
+
+        .nav-right a{
+            text-decoration:none;
+            background:#ef4444;
+            color:white;
+            padding:10px 16px;
+            border-radius:10px;
+            font-weight:600;
+            font-size:14px;
+        }
+
+        .page{
+            max-width:1200px;
+            margin:32px auto;
+            padding:0 20px;
+        }
+
+        @media (max-width: 768px){
+            .navbar{
+                flex-direction:column;
+                gap:12px;
+                padding:16px;
+            }
+
+            .nav-left{
+                flex-direction:column;
+                gap:12px;
+            }
+
+            .nav-links{
+                flex-wrap:wrap;
+                justify-content:center;
+            }
+        }
+    </style>
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    {% if request.user.is_authenticated %}
+    <div class="navbar">
+        <div class="nav-left">
+            <a href="/dashboard/" class="nav-logo">
+                <img src="{% static 'logo/laskora-main.png' %}" alt="Laskora">
+            </a>
+
+            <div class="nav-links">
+                <a href="/dashboard/">Dashboard</a>
+                <a href="/invoices/">Invoices</a>
+                <a href="/create-invoice/">Create Invoice</a>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            <a href="/logout/">Logout</a>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="page">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
