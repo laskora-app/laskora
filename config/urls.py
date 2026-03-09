@@ -5,6 +5,7 @@ from django.urls import path
 from billing.views import invoice_pdf, send_invoice_email, create_invoice_page, dashboard, invoices_list, delete_invoice, edit_invoice, signup_view, login_view
 from billing.views import logout_view
 urlpatterns = [
+    path('', views.home_page, name='home'),
     path('admin/', admin.site.urls),
     path('invoice/<int:invoice_id>/pdf/', invoice_pdf),
     path('invoice/<int:invoice_id>/send/', send_invoice_email),

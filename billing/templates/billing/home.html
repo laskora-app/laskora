@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laskora - Smart Invoicing</title>
+    {% load static %}
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Inter', Arial, sans-serif;
+            background:#f8fbff;
+            color:#1e293b;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        .navbar{
+            width:100%;
+            padding:20px 60px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:white;
+            box-shadow:0 4px 20px rgba(0,0,0,0.04);
+            position:sticky;
+            top:0;
+            z-index:100;
+        }
+
+        .brand{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            font-size:28px;
+            font-weight:800;
+            color:#2563eb;
+        }
+
+        .brand img{
+            height:42px;
+            width:auto;
+        }
+
+        .nav-links{
+            display:flex;
+            align-items:center;
+            gap:14px;
+        }
+
+        .nav-links a{
+            padding:10px 18px;
+            border-radius:10px;
+            font-weight:600;
+            font-size:14px;
+        }
+
+        .login-btn{
+            color:#334155;
+            background:#eef2ff;
+        }
+
+        .signup-btn{
+            color:white;
+            background:#2563eb;
+        }
+
+        .hero{
+            max-width:1200px;
+            margin:0 auto;
+            padding:90px 60px 70px;
+            display:grid;
+            grid-template-columns:1.1fr 0.9fr;
+            gap:40px;
+            align-items:center;
+        }
+
+        .hero h1{
+            font-size:56px;
+            line-height:1.1;
+            margin-bottom:20px;
+            color:#0f172a;
+        }
+
+        .hero p{
+            font-size:18px;
+            color:#64748b;
+            line-height:1.7;
+            margin-bottom:30px;
+            max-width:600px;
+        }
+
+        .hero-actions{
+            display:flex;
+            gap:14px;
+            flex-wrap:wrap;
+        }
+
+        .hero-actions a{
+            padding:14px 24px;
+            border-radius:12px;
+            font-weight:700;
+            font-size:15px;
+        }
+
+        .primary-btn{
+            background:#2563eb;
+            color:white;
+        }
+
+        .secondary-btn{
+            background:white;
+            color:#2563eb;
+            border:1px solid #cbd5e1;
+        }
+
+        .hero-card{
+            background:white;
+            border-radius:24px;
+            padding:30px;
+            box-shadow:0 20px 50px rgba(37,99,235,0.10);
+            border:1px solid #e2e8f0;
+        }
+
+        .invoice-preview{
+            border:1px solid #e2e8f0;
+            border-radius:18px;
+            padding:20px;
+            background:#fcfdff;
+        }
+
+        .invoice-top{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:20px;
+        }
+
+        .badge{
+            background:#dbeafe;
+            color:#1d4ed8;
+            padding:8px 12px;
+            border-radius:999px;
+            font-size:13px;
+            font-weight:700;
+        }
+
+        .invoice-lines{
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+        }
+
+        .line{
+            height:14px;
+            background:#e2e8f0;
+            border-radius:8px;
+        }
+
+        .line.small{ width:40%; }
+        .line.medium{ width:65%; }
+        .line.full{ width:100%; }
+
+        .summary{
+            margin-top:24px;
+            background:#eff6ff;
+            border-radius:14px;
+            padding:18px;
+        }
+
+        .summary p{
+            margin:8px 0;
+            font-size:14px;
+            color:#334155;
+        }
+
+        .section{
+            max-width:1200px;
+            margin:0 auto;
+            padding:20px 60px 80px;
+        }
+
+        .section-title{
+            text-align:center;
+            margin-bottom:40px;
+        }
+
+        .section-title h2{
+            font-size:36px;
+            margin-bottom:10px;
+        }
+
+        .section-title p{
+            color:#64748b;
+            font-size:16px;
+        }
+
+        .features{
+            display:grid;
+            grid-template-columns:repeat(3, 1fr);
+            gap:24px;
+        }
+
+        .feature-card{
+            background:white;
+            padding:28px;
+            border-radius:20px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.05);
+            border:1px solid #e2e8f0;
+        }
+
+        .feature-card h3{
+            font-size:20px;
+            margin-bottom:12px;
+            color:#0f172a;
+        }
+
+        .feature-card p{
+            color:#64748b;
+            line-height:1.7;
+            font-size:15px;
+        }
+
+        .cta{
+            max-width:1000px;
+            margin:0 auto 80px;
+            background:linear-gradient(135deg, #2563eb, #1d4ed8);
+            color:white;
+            padding:50px 40px;
+            border-radius:28px;
+            text-align:center;
+        }
+
+        .cta h2{
+            font-size:38px;
+            margin-bottom:14px;
+        }
+
+        .cta p{
+            font-size:17px;
+            opacity:0.92;
+            margin-bottom:24px;
+        }
+
+        .cta a{
+            display:inline-block;
+            background:white;
+            color:#2563eb;
+            padding:14px 24px;
+            border-radius:12px;
+            font-weight:700;
+        }
+
+        .footer{
+            text-align:center;
+            padding:30px 20px 50px;
+            color:#64748b;
+            font-size:14px;
+        }
+
+        @media (max-width: 960px){
+            .hero{
+                grid-template-columns:1fr;
+                padding:70px 24px 50px;
+            }
+
+            .section{
+                padding:20px 24px 60px;
+            }
+
+            .features{
+                grid-template-columns:1fr;
+            }
+
+            .hero h1{
+                font-size:40px;
+            }
+
+            .navbar{
+                padding:18px 24px;
+                flex-direction:column;
+                gap:16px;
+            }
+
+            .brand{
+                font-size:24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="brand">
+            <img src="{% static 'logo/laskora-main.png' %}" alt="Laskora Logo">
+            <span>Laskora</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="/login/" class="login-btn">Login</a>
+            <a href="/signup/" class="signup-btn">Start Free</a>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div>
+            <h1>Smart invoicing for freelancers and small businesses.</h1>
+            <p>
+                Create professional invoices, manage clients, send PDFs, and keep your billing simple with Laskora.
+            </p>
+
+            <div class="hero-actions">
+                <a href="/signup/" class="primary-btn">Create Free Account</a>
+                <a href="/login/" class="secondary-btn">Login</a>
+            </div>
+        </div>
+
+        <div class="hero-card">
+            <div class="invoice-preview">
+                <div class="invoice-top">
+                    <h3 style="font-size:22px;">Invoice Preview</h3>
+                    <span class="badge">Paid</span>
+                </div>
+
+                <div class="invoice-lines">
+                    <div class="line medium"></div>
+                    <div class="line small"></div>
+                    <div class="line full"></div>
+                    <div class="line full"></div>
+                    <div class="line medium"></div>
+                </div>
+
+                <div class="summary">
+                    <p>Subtotal: €200.00</p>
+                    <p>VAT: €51.00</p>
+                    <p><strong>Total: €251.00</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-title">
+            <h2>Everything you need to send invoices</h2>
+            <p>Designed to make billing fast, simple, and professional.</p>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>Create invoices fast</h3>
+                <p>Generate clean, professional invoices in seconds with a simple and easy workflow.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Manage your clients</h3>
+                <p>Keep all customer details organized and ready every time you create a new invoice.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Send and download PDF</h3>
+                <p>Download invoice PDFs or prepare them to be shared with customers quickly and clearly.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Start using Laskora today</h2>
+        <p>Create your account and make invoicing easier from your first client.</p>
+        <a href="/signup/">Get Started</a>
+    </section>
+
+    <div class="footer">
+        © 2026 Laskora. Simple invoicing for modern businesses.
+    </div>
+
+</body>
+</html>

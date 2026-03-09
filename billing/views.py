@@ -6,6 +6,7 @@ from .models import Invoice
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
 
 COMPANY_NAME = "Laskora"
@@ -262,3 +263,5 @@ from django.contrib.auth import logout
 def logout_view(request):
     logout(request)
     return redirect('/login/')
+def home_page(request):
+    return render(request, 'billing/home.html')
