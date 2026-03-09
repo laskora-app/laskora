@@ -4,158 +4,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laskora - Smart Invoicing</title>
-
+<title>Laskora</title>
 <style>
-    .vertical-buttons{
-display:flex;
-flex-direction:column;
-align-items:flex-start;
-gap:12px;
-margin-top:20px;
-}
-
-.btn-outline{
-background:white;
-color:#2563eb;
-border:1px solid #cbd5e1;
-}
-
-.btn-outline:hover{
-background:#f8fafc;
-}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-font-family:Arial, sans-serif;
-background:#f7f9fc;
-color:#1e293b;
-}
-
-.container{
-width:90%;
-max-width:1100px;
-margin:auto;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f8fbff;color:#1e293b;line-height:1.6}
+a{text-decoration:none}
+.container{width:min(1100px,92%);margin:auto}
 
 .navbar{
-background:white;
+background:#fff;
 border-bottom:1px solid #e5e7eb;
 padding:16px 0;
+position:sticky;
+top:0;
+z-index:1000;
 }
-
 .nav-inner{
 display:flex;
 justify-content:space-between;
 align-items:center;
 }
-
-.brand{
-display:flex;
-align-items:center;
-gap:10px;
-}
-
 .brand img{
-height:40px;
+height:42px;
+display:block;
 }
-
-.brand strong{
-font-size:22px;
-color:#2563eb;
-}
-
-.nav-actions a{
+.nav-actions .btn{
 padding:10px 18px;
 border-radius:10px;
-font-weight:600;
-text-decoration:none;
-}
-
-.login{
+font-weight:700;
 background:#eef2ff;
 color:#1e3a8a;
-}
-
-.signup{
-background:#2563eb;
-color:white;
+display:inline-block;
 }
 
 .hero{
-padding:70px 0;
+padding:70px 0 40px;
+background:linear-gradient(180deg,#f8fbff 0%,#eff6ff 100%);
 }
-
 .hero-grid{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:1.1fr 0.9fr;
 gap:40px;
 align-items:center;
 }
-
 .hero h1{
-font-size:48px;
-margin-bottom:20px;
+font-size:56px;
+line-height:1.1;
+margin-bottom:18px;
+color:#0f172a;
 }
-
 .hero p{
 font-size:18px;
 color:#475569;
-margin-bottom:20px;
+margin-bottom:24px;
+max-width:620px;
 }
 
 .hero-buttons{
 display:flex;
-gap:10px;
+flex-direction:column;
+gap:12px;
+width:280px;
+max-width:100%;
 }
-
 .btn{
-padding:12px 20px;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
+display:inline-block;
+padding:14px 20px;
+border-radius:12px;
+font-weight:700;
+text-align:center;
 }
+.btn-primary{background:#2563eb;color:#fff}
+.btn-secondary{background:#e0e7ff;color:#1d4ed8}
+.btn-outline{background:#fff;color:#2563eb;border:1px solid #cbd5e1}
 
-.btn-primary{
-background:#2563eb;
-color:white;
-}
-
-.btn-secondary{
-background:#eef2ff;
-color:#1e3a8a;
-}
-
-.preview{
-background:white;
-padding:25px;
-border-radius:20px;
+.hero-card{
+background:#fff;
 border:1px solid #e5e7eb;
+border-radius:22px;
+padding:24px;
+box-shadow:0 12px 30px rgba(0,0,0,.05);
 }
-
+.hero-card h3{
+font-size:22px;
+margin-bottom:16px;
+}
 .line{
 height:12px;
 background:#dbeafe;
-margin-bottom:10px;
-border-radius:6px;
+border-radius:8px;
+margin-bottom:12px;
+}
+.w40{width:40%}
+.w60{width:60%}
+.w80{width:80%}
+.w100{width:100%}
+.summary{
+margin-top:18px;
+background:#eff6ff;
+padding:16px;
+border-radius:14px;
+font-size:14px;
 }
 
 .section{
-padding:80px 0;
+padding:70px 0;
 }
-
 .section-title{
 text-align:center;
-margin-bottom:40px;
+margin-bottom:36px;
+}
+.section-title h2{
+font-size:38px;
+margin-bottom:10px;
+}
+.section-title p{
+color:#64748b;
+font-size:17px;
 }
 
-.section-title h2{
-font-size:36px;
+.pricing-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:24px;
+}
+.pricing-card{
+background:#fff;
+border:1px solid #e5e7eb;
+border-radius:20px;
+padding:28px;
+box-shadow:0 10px 24px rgba(0,0,0,.04);
+}
+.pricing-card.featured{
+border:2px solid #2563eb;
+}
+.pricing-card h3{
+font-size:24px;
+margin-bottom:12px;
+}
+.price{
+font-size:42px;
+font-weight:800;
+color:#2563eb;
+margin-bottom:12px;
+}
+.price span{
+font-size:18px;
+font-weight:500;
+color:#64748b;
+}
+.pricing-card p{
+margin-bottom:16px;
+color:#475569;
+}
+.pricing-card ul{
+list-style:none;
+padding-left:0;
+}
+.pricing-card li{
 margin-bottom:10px;
 }
 
@@ -164,256 +170,221 @@ display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:20px;
 }
-
 .feature{
-background:white;
-padding:20px;
-border-radius:16px;
+background:#fff;
 border:1px solid #e5e7eb;
+border-radius:18px;
+padding:24px;
+box-shadow:0 10px 24px rgba(0,0,0,.04);
 }
-
 .feature h3{
 margin-bottom:10px;
+font-size:20px;
 }
 
-.demo{
-background:white;
-padding:20px;
-border-radius:20px;
+.demo-box{
+background:#fff;
 border:1px solid #e5e7eb;
+border-radius:20px;
+padding:20px;
+box-shadow:0 10px 24px rgba(0,0,0,.04);
 }
-
-.demo iframe{
+.demo-box iframe{
 width:100%;
-height:400px;
+height:460px;
 border:none;
-border-radius:12px;
+border-radius:14px;
 }
 
 .footer{
 background:#0f172a;
 color:#cbd5e1;
-padding:40px 0;
-text-align:center;
+padding:40px 0 25px;
 margin-top:40px;
 }
-
-@media(max-width:900px){
-
-.hero-grid{
-grid-template-columns:1fr;
-}
-
-.features{
-grid-template-columns:1fr;
-.pricing-grid{
+.footer-grid{
 display:grid;
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:2fr 1fr 1fr;
 gap:24px;
-margin-top:20px;
+margin-bottom:20px;
 }
-
-.pricing-card{
-background:white;
-padding:30px;
-border-radius:20px;
-border:1px solid #e5e7eb;
-box-shadow:0 10px 25px rgba(0,0,0,0.05);
-}
-
-.pricing-card h3{
-font-size:24px;
-margin-bottom:16px;
-color:#0f172a;
-}
-
-.price{
-font-size:42px;
-font-weight:800;
-color:#2563eb;
-margin-bottom:14px;
-}
-
-.price span{
-font-size:18px;
-font-weight:500;
-color:#64748b;
-}
-
-.pricing-card p{
-color:#475569;
-margin-bottom:18px;
-}
-
-.pricing-card ul{
-list-style:none;
-margin-bottom:24px;
-padding-left:0;
-}
-
-.pricing-card ul li{
+.footer h4{
+color:#fff;
 margin-bottom:10px;
-color:#334155;
 }
-
-.featured{
-border:2px solid #2563eb;
+.footer a,.footer p{
+color:#cbd5e1;
+display:block;
+margin-bottom:8px;
+}
+.footer-bottom{
+border-top:1px solid rgba(255,255,255,.1);
+padding-top:18px;
+text-align:center;
+font-size:14px;
+color:#94a3b8;
 }
 
 @media(max-width:900px){
-.pricing-grid{
+.hero-grid,
+.pricing-grid,
+.features,
+.footer-grid{
 grid-template-columns:1fr;
 }
+.hero h1{font-size:40px}
+.section-title h2{font-size:30px}
+.demo-box iframe{height:240px}
+.nav-inner{
+flex-direction:column;
+gap:14px;
+}
+.hero-buttons{
+width:100%;
 }
 }
-
-}
-
 </style>
-
 </head>
 <body>
 
 <nav class="navbar">
 <div class="container nav-inner">
-
 <div class="brand">
-<img src="{% static 'logo/laskora-main.png' %}">
-
+<img src="{% static 'logo/laskora-main.png' %}" alt="Laskora">
 </div>
-
 <div class="nav-actions">
-    <a href="/login/" class="login">Login</a>
+<a href="/login/" class="btn">Login</a>
 </div>
-
 </div>
 </nav>
 
 <section class="hero">
 <div class="container hero-grid">
-
 <div>
-<h1>Professional invoicing made simple</h1>
+<h1>Professional invoicing made simple.</h1>
+<p>Create invoices, manage clients, and track billing easily with Laskora. Start with a 7-day free trial, no credit card required.</p>
 
-<p>
-Create invoices, manage clients and track billing easily with Laskora.
-Start with a 7-day free trial, no credit card required.
-</p>
-
-<div class="hero-buttons vertical-buttons">
-    <a href="/signup/" class="btn btn-primary">Create Account</a>
-    <a href="/signup/" class="btn btn-secondary">Start 7-Day Free Trial</a>
-    <a href="#demo" class="btn btn-outline">Watch Demo</a>
+<div class="hero-buttons">
+<a href="/signup/" class="btn btn-primary">Create Account</a>
+<a href="/signup/" class="btn btn-secondary">Start 7-Day Free Trial</a>
+<a href="#demo" class="btn btn-outline">Watch Demo</a>
+</div>
 </div>
 
+<div class="hero-card">
+<h3>Invoice Preview</h3>
+<div class="line w60"></div>
+<div class="line w40"></div>
+<div class="line w100"></div>
+<div class="line w100"></div>
+<div class="line w80"></div>
+<div class="summary">
+<p>Subtotal: €200.00</p>
+<p>VAT: €51.00</p>
+<p><strong>Total: €251.00</strong></p>
 </div>
-
-<div class="preview">
-
-<div class="line" style="width:60%"></div>
-<div class="line" style="width:40%"></div>
-<div class="line" style="width:100%"></div>
-<div class="line" style="width:100%"></div>
-<div class="line" style="width:80%"></div>
-
 </div>
-
 </div>
 </section>
+
 <section class="section">
-    <div class="container">
+<div class="container">
+<div class="section-title">
+<h2>Simple pricing</h2>
+<p>Choose the billing model that fits your business.</p>
+</div>
 
-        <div class="section-title">
-            <h2>Simple pricing</h2>
-            <p>Choose the billing model that fits your business.</p>
-        </div>
+<div class="pricing-grid">
+<div class="pricing-card featured">
+<h3>Monthly Plan</h3>
+<div class="price">8 € <span>/ month</span></div>
+<p>Best for freelancers and businesses that send invoices regularly.</p>
+<ul>
+<li>✓ Unlimited access to the platform</li>
+<li>✓ Manage clients and invoices</li>
+<li>✓ Simple and professional workflow</li>
+</ul>
+</div>
 
-        <div class="pricing-grid">
-
-            <div class="pricing-card featured">
-                <h3>Monthly Plan</h3>
-                <div class="price">8 € <span>/ month</span></div>
-                <p>Best for freelancers and businesses that send invoices regularly.</p>
-                <ul>
-                    <li>✓ Unlimited access to the platform</li>
-                    <li>✓ Manage clients and invoices</li>
-                    <li>✓ Simple and professional workflow</li>
-                </ul>
-                <a href="/signup/" class="btn btn-primary">Start with Monthly Plan</a>
-            </div>
-
-            <div class="pricing-card">
-                <h3>Pay Per Invoice</h3>
-                <div class="price">1 € <span>/ invoice</span></div>
-                <p>Perfect if you send only a few invoices and want maximum flexibility.</p>
-                <ul>
-                    <li>✓ Pay only when you create an invoice</li>
-                    <li>✓ No monthly commitment</li>
-                    <li>✓ Good for occasional billing</li>
-                </ul>
-                <a href="/signup/" class="btn btn-secondary">Create Account</a>
-            </div>
-
-        </div>
-
-    </div>
+<div class="pricing-card">
+<h3>Pay Per Invoice</h3>
+<div class="price">1 € <span>/ invoice</span></div>
+<p>Perfect if you send only a few invoices and want maximum flexibility.</p>
+<ul>
+<li>✓ Pay only when you create an invoice</li>
+<li>✓ No monthly commitment</li>
+<li>✓ Good for occasional billing</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
+
+<section class="section">
+<div class="container">
+<div class="section-title">
+<h2>Everything you need to manage invoices</h2>
+<p>A clean and modern invoicing system designed for speed and clarity.</p>
+</div>
 
 <div class="features">
-
 <div class="feature">
 <h3>Create invoices</h3>
-<p>Create professional invoices in seconds.</p>
+<p>Generate clear and professional invoices quickly.</p>
 </div>
-
 <div class="feature">
 <h3>Manage clients</h3>
-<p>Store customer information easily.</p>
+<p>Store customer details and prepare invoices faster.</p>
 </div>
-
 <div class="feature">
 <h3>Download PDF</h3>
-<p>Export invoices ready to send.</p>
+<p>Prepare invoice documents ready to save and share.</p>
 </div>
-
 <div class="feature">
 <h3>Access anywhere</h3>
-<p>Use Laskora from mobile or computer.</p>
+<p>Use Laskora from laptop, desktop, or mobile browser.</p>
 </div>
-
 </div>
-
 </div>
-
 </section>
 
 <section class="section" id="demo">
-
 <div class="container">
-
 <div class="section-title">
-<h2>See how it works</h2>
+<h2>See how Laskora works</h2>
 <p>Watch a short demo explaining the platform.</p>
 </div>
 
-<div class="demo">
-
-<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-
+<div class="demo-box">
+<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Laskora demo" allowfullscreen></iframe>
 </div>
-
 </div>
-
 </section>
 
 <footer class="footer">
-
 <div class="container">
-
-<p>© 2026 Laskora. All rights reserved.</p>
-
+<div class="footer-grid">
+<div>
+<h4>Laskora</h4>
+<p>Smart invoicing platform for freelancers and small businesses.</p>
+</div>
+<div>
+<h4>Pages</h4>
+<a href="/">Home</a>
+<a href="/login/">Login</a>
+<a href="/signup/">Sign up</a>
+</div>
+<div>
+<h4>Contact</h4>
+<p>support@laskora.com</p>
+<p>Available online</p>
+</div>
 </div>
 
+<div class="footer-bottom">
+© 2026 Laskora. All rights reserved.
+</div>
+</div>
 </footer>
 
 </body>
