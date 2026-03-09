@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-awtba%z=v^=z0@kvn=)lkr_yo4+0gnxw0!fh_9jtl@75ruxtfb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["laskora.onrender.com"]
+ALLOWED_HOSTS = ["laskora.onrender.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
