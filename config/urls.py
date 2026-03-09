@@ -12,7 +12,7 @@ urlpatterns = [
     path('invoice/<int:invoice_id>/send/', send_invoice_email),
     path('invoice/<int:invoice_id>/delete/', delete_invoice),
     path('create-invoice/', create_invoice_page),
-    path('dashboard/', dashboard),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('invoices/', invoices_list),
     path('invoice/<int:invoice_id>/edit/', edit_invoice),
     path('signup/', signup_view),

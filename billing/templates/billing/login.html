@@ -106,18 +106,22 @@ button:hover{
 <div class="subtitle">Login to manage your invoices</div>
 
 <form method="post">
-{% csrf_token %}
+    {% csrf_token %}
 
-<label>Username</label>
-<input type="text" name="username">
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color:red; margin-bottom:10px;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
 
-<label>Password</label>
-<input type="password" name="password">
+    <label>Username</label>
+    <input type="text" name="username" required>
 
-<button type="submit">Login</button>
+    <label>Password</label>
+    <input type="password" name="password" required>
 
+    <button type="submit">Login</button>
 </form>
-
 <div class="signup">
 Don't have an account? <a href="/signup/">Sign up</a>
 </div>
