@@ -7,6 +7,23 @@
 <title>Laskora - Smart Invoicing</title>
 
 <style>
+    .vertical-buttons{
+display:flex;
+flex-direction:column;
+align-items:flex-start;
+gap:12px;
+margin-top:20px;
+}
+
+.btn-outline{
+background:white;
+color:#2563eb;
+border:1px solid #cbd5e1;
+}
+
+.btn-outline:hover{
+background:#f8fafc;
+}
 
 *{
 margin:0;
@@ -189,6 +206,65 @@ grid-template-columns:1fr;
 
 .features{
 grid-template-columns:1fr;
+.pricing-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:24px;
+margin-top:20px;
+}
+
+.pricing-card{
+background:white;
+padding:30px;
+border-radius:20px;
+border:1px solid #e5e7eb;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.pricing-card h3{
+font-size:24px;
+margin-bottom:16px;
+color:#0f172a;
+}
+
+.price{
+font-size:42px;
+font-weight:800;
+color:#2563eb;
+margin-bottom:14px;
+}
+
+.price span{
+font-size:18px;
+font-weight:500;
+color:#64748b;
+}
+
+.pricing-card p{
+color:#475569;
+margin-bottom:18px;
+}
+
+.pricing-card ul{
+list-style:none;
+margin-bottom:24px;
+padding-left:0;
+}
+
+.pricing-card ul li{
+margin-bottom:10px;
+color:#334155;
+}
+
+.featured{
+border:2px solid #2563eb;
+}
+
+@media(max-width:900px){
+.pricing-grid{
+grid-template-columns:1fr;
+}
+}
 }
 
 }
@@ -207,8 +283,7 @@ grid-template-columns:1fr;
 </div>
 
 <div class="nav-actions">
-<a href="/login/" class="login">Login</a>
-<a href="/signup/" class="signup">creat account</a>
+    <a href="/login/" class="login">Login</a>
 </div>
 
 </div>
@@ -225,9 +300,10 @@ Create invoices, manage clients and track billing easily with Laskora.
 Start with a 7-day free trial, no credit card required.
 </p>
 
-<div class="hero-buttons">
-<a href="/signup/" class="btn btn-primary">Start 7-Day Free Trial</a>
-<a href="#demo" class="btn btn-secondary">Watch Demo</a>
+<div class="hero-buttons vertical-buttons">
+    <a href="/signup/" class="btn btn-primary">Create Account</a>
+    <a href="/signup/" class="btn btn-secondary">Start 7-Day Free Trial</a>
+    <a href="#demo" class="btn btn-outline">Watch Demo</a>
 </div>
 
 </div>
@@ -244,15 +320,44 @@ Start with a 7-day free trial, no credit card required.
 
 </div>
 </section>
-
 <section class="section">
+    <div class="container">
 
-<div class="container">
+        <div class="section-title">
+            <h2>Simple pricing</h2>
+            <p>Choose the billing model that fits your business.</p>
+        </div>
 
-<div class="section-title">
-<h2>Everything you need</h2>
-<p>All tools needed to manage invoices professionally.</p>
-</div>
+        <div class="pricing-grid">
+
+            <div class="pricing-card featured">
+                <h3>Monthly Plan</h3>
+                <div class="price">8 € <span>/ month</span></div>
+                <p>Best for freelancers and businesses that send invoices regularly.</p>
+                <ul>
+                    <li>✓ Unlimited access to the platform</li>
+                    <li>✓ Manage clients and invoices</li>
+                    <li>✓ Simple and professional workflow</li>
+                </ul>
+                <a href="/signup/" class="btn btn-primary">Start with Monthly Plan</a>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Pay Per Invoice</h3>
+                <div class="price">1 € <span>/ invoice</span></div>
+                <p>Perfect if you send only a few invoices and want maximum flexibility.</p>
+                <ul>
+                    <li>✓ Pay only when you create an invoice</li>
+                    <li>✓ No monthly commitment</li>
+                    <li>✓ Good for occasional billing</li>
+                </ul>
+                <a href="/signup/" class="btn btn-secondary">Create Account</a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
 
 <div class="features">
 
