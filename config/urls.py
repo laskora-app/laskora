@@ -1,9 +1,10 @@
-from django.conf import settings
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from billing import views
+from django.conf import settings
+from django.conf.urls.static import static
 from billing.views import invoice_pdf, send_invoice_email, create_invoice_page, dashboard, invoices_list, delete_invoice, edit_invoice, signup_view, login_view
-from billing.views import logout_view
+from billing.views import logout_view, signup_view, login_view
 urlpatterns = [
     path('', views.home_page, name='home'),
     path('admin/', admin.site.urls),
