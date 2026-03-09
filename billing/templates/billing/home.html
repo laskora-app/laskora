@@ -2,390 +2,767 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laskora</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#f8fbff;color:#1e293b;line-height:1.6}
-a{text-decoration:none}
-.container{width:min(1100px,92%);margin:auto}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laskora - Smart Invoicing Platform</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
-.navbar{
-background:#fff;
-border-bottom:1px solid #e5e7eb;
-padding:16px 0;
-position:sticky;
-top:0;
-z-index:1000;
-}
-.nav-inner{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-.brand img{
-height:42px;
-display:block;
-}
-.nav-actions .btn{
-padding:10px 18px;
-border-radius:10px;
-font-weight:700;
-background:#eef2ff;
-color:#1e3a8a;
-display:inline-block;
-}
+        html{
+            scroll-behavior:smooth;
+        }
 
-.hero{
-padding:70px 0 40px;
-background:linear-gradient(180deg,#f8fbff 0%,#eff6ff 100%);
-}
-.hero-grid{
-display:grid;
-grid-template-columns:1.1fr 0.9fr;
-gap:40px;
-align-items:center;
-}
-.hero h1{
-font-size:56px;
-line-height:1.1;
-margin-bottom:18px;
-color:#0f172a;
-}
-.hero p{
-font-size:18px;
-color:#475569;
-margin-bottom:24px;
-max-width:620px;
-}
+        body{
+            font-family:Arial, sans-serif;
+            background:#f8fbff;
+            color:#0f172a;
+            line-height:1.6;
+        }
 
-.hero-buttons{
-display:flex;
-flex-direction:column;
-gap:12px;
-width:280px;
-max-width:100%;
-}
-.btn{
-display:inline-block;
-padding:14px 20px;
-border-radius:12px;
-font-weight:700;
-text-align:center;
-}
-.btn-primary{background:#2563eb;color:#fff}
-.btn-secondary{background:#e0e7ff;color:#1d4ed8}
-.btn-outline{background:#fff;color:#2563eb;border:1px solid #cbd5e1}
+        a{
+            text-decoration:none;
+        }
 
-.hero-card{
-background:#fff;
-border:1px solid #e5e7eb;
-border-radius:22px;
-padding:24px;
-box-shadow:0 12px 30px rgba(0,0,0,.05);
-}
-.hero-card h3{
-font-size:22px;
-margin-bottom:16px;
-}
-.line{
-height:12px;
-background:#dbeafe;
-border-radius:8px;
-margin-bottom:12px;
-}
-.w40{width:40%}
-.w60{width:60%}
-.w80{width:80%}
-.w100{width:100%}
-.summary{
-margin-top:18px;
-background:#eff6ff;
-padding:16px;
-border-radius:14px;
-font-size:14px;
-}
+        .container{
+            width:min(1150px, 92%);
+            margin:auto;
+        }
 
-.section{
-padding:70px 0;
-}
-.section-title{
-text-align:center;
-margin-bottom:36px;
-}
-.section-title h2{
-font-size:38px;
-margin-bottom:10px;
-}
-.section-title p{
-color:#64748b;
-font-size:17px;
-}
+        .navbar{
+            position:sticky;
+            top:0;
+            z-index:1000;
+            background:rgba(255,255,255,0.92);
+            backdrop-filter:blur(8px);
+            border-bottom:1px solid #e2e8f0;
+        }
 
-.pricing-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:24px;
-}
-.pricing-card{
-background:#fff;
-border:1px solid #e5e7eb;
-border-radius:20px;
-padding:28px;
-box-shadow:0 10px 24px rgba(0,0,0,.04);
-}
-.pricing-card.featured{
-border:2px solid #2563eb;
-}
-.pricing-card h3{
-font-size:24px;
-margin-bottom:12px;
-}
-.price{
-font-size:42px;
-font-weight:800;
-color:#2563eb;
-margin-bottom:12px;
-}
-.price span{
-font-size:18px;
-font-weight:500;
-color:#64748b;
-}
-.pricing-card p{
-margin-bottom:16px;
-color:#475569;
-}
-.pricing-card ul{
-list-style:none;
-padding-left:0;
-}
-.pricing-card li{
-margin-bottom:10px;
-}
+        .nav-inner{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:16px 0;
+        }
 
-.features{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px;
-}
-.feature{
-background:#fff;
-border:1px solid #e5e7eb;
-border-radius:18px;
-padding:24px;
-box-shadow:0 10px 24px rgba(0,0,0,.04);
-}
-.feature h3{
-margin-bottom:10px;
-font-size:20px;
-}
+        .brand img{
+            height:46px;
+            display:block;
+        }
 
-.demo-box{
-background:#fff;
-border:1px solid #e5e7eb;
-border-radius:20px;
-padding:20px;
-box-shadow:0 10px 24px rgba(0,0,0,.04);
-}
-.demo-box iframe{
-width:100%;
-height:460px;
-border:none;
-border-radius:14px;
-}
+        .nav-links{
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
 
-.footer{
-background:#0f172a;
-color:#cbd5e1;
-padding:40px 0 25px;
-margin-top:40px;
-}
-.footer-grid{
-display:grid;
-grid-template-columns:2fr 1fr 1fr;
-gap:24px;
-margin-bottom:20px;
-}
-.footer h4{
-color:#fff;
-margin-bottom:10px;
-}
-.footer a,.footer p{
-color:#cbd5e1;
-display:block;
-margin-bottom:8px;
-}
-.footer-bottom{
-border-top:1px solid rgba(255,255,255,.1);
-padding-top:18px;
-text-align:center;
-font-size:14px;
-color:#94a3b8;
-}
+        .nav-link{
+            color:#475569;
+            font-weight:600;
+            font-size:15px;
+        }
 
-@media(max-width:900px){
-.hero-grid,
-.pricing-grid,
-.features,
-.footer-grid{
-grid-template-columns:1fr;
-}
-.hero h1{font-size:40px}
-.section-title h2{font-size:30px}
-.demo-box iframe{height:240px}
-.nav-inner{
-flex-direction:column;
-gap:14px;
-}
-.hero-buttons{
-width:100%;
-}
-}
-</style>
+        .btn{
+            display:inline-block;
+            padding:13px 22px;
+            border-radius:12px;
+            font-weight:700;
+            transition:0.2s ease;
+            text-align:center;
+            border:none;
+            cursor:pointer;
+        }
+
+        .btn-primary{
+            background:#2563eb;
+            color:white;
+        }
+
+        .btn-primary:hover{
+            background:#1d4ed8;
+        }
+
+        .btn-secondary{
+            background:#e0e7ff;
+            color:#1d4ed8;
+        }
+
+        .btn-secondary:hover{
+            background:#c7d2fe;
+        }
+
+        .btn-outline{
+            background:white;
+            color:#2563eb;
+            border:1px solid #cbd5e1;
+        }
+
+        .btn-outline:hover{
+            background:#f8fafc;
+        }
+
+        .hero{
+            padding:80px 0 50px;
+            background:
+                radial-gradient(circle at top right, rgba(37,99,235,0.10), transparent 30%),
+                linear-gradient(180deg, #f8fbff 0%, #eff6ff 100%);
+        }
+
+        .hero-grid{
+            display:grid;
+            grid-template-columns:1.05fr 0.95fr;
+            gap:42px;
+            align-items:center;
+        }
+
+        .badge{
+            display:inline-block;
+            padding:8px 14px;
+            border-radius:999px;
+            background:#dbeafe;
+            color:#1d4ed8;
+            font-weight:700;
+            font-size:13px;
+            margin-bottom:18px;
+        }
+
+        .hero h1{
+            font-size:58px;
+            line-height:1.05;
+            margin-bottom:18px;
+            color:#0f172a;
+        }
+
+        .hero p{
+            font-size:19px;
+            color:#475569;
+            max-width:650px;
+            margin-bottom:26px;
+        }
+
+        .hero-buttons{
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+            width:300px;
+            max-width:100%;
+            margin-bottom:26px;
+        }
+
+        .hero-points{
+            display:grid;
+            grid-template-columns:repeat(2, minmax(0,1fr));
+            gap:12px;
+            margin-top:10px;
+        }
+
+        .hero-points div{
+            background:white;
+            border:1px solid #e2e8f0;
+            border-radius:14px;
+            padding:14px 16px;
+            color:#334155;
+            font-size:14px;
+            box-shadow:0 10px 24px rgba(0,0,0,0.04);
+        }
+
+        .hero-card{
+            background:white;
+            border:1px solid #e2e8f0;
+            border-radius:24px;
+            padding:26px;
+            box-shadow:0 20px 50px rgba(37,99,235,0.08);
+        }
+
+        .hero-card-top{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:18px;
+        }
+
+        .hero-card-top h3{
+            font-size:22px;
+        }
+
+        .paid-badge{
+            padding:6px 12px;
+            border-radius:999px;
+            background:#dcfce7;
+            color:#166534;
+            font-size:13px;
+            font-weight:700;
+        }
+
+        .invoice-preview{
+            border:1px solid #e2e8f0;
+            border-radius:18px;
+            padding:18px;
+            background:#fcfdff;
+        }
+
+        .line{
+            height:12px;
+            background:#dbeafe;
+            border-radius:8px;
+            margin-bottom:12px;
+        }
+
+        .w40{width:40%}
+        .w55{width:55%}
+        .w60{width:60%}
+        .w80{width:80%}
+        .w100{width:100%}
+
+        .summary-box{
+            margin-top:20px;
+            background:#eff6ff;
+            padding:18px;
+            border-radius:14px;
+            color:#334155;
+            font-size:14px;
+        }
+
+        .section{
+            padding:80px 0;
+        }
+
+        .section-title{
+            text-align:center;
+            margin-bottom:44px;
+        }
+
+        .section-title h2{
+            font-size:40px;
+            margin-bottom:10px;
+            color:#0f172a;
+        }
+
+        .section-title p{
+            color:#64748b;
+            font-size:17px;
+            max-width:760px;
+            margin:auto;
+        }
+
+        .pricing-grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:26px;
+        }
+
+        .pricing-card{
+            background:white;
+            border:1px solid #e5e7eb;
+            border-radius:22px;
+            padding:30px;
+            box-shadow:0 12px 28px rgba(0,0,0,0.04);
+        }
+
+        .pricing-card.featured{
+            border:2px solid #2563eb;
+            box-shadow:0 20px 40px rgba(37,99,235,0.08);
+        }
+
+        .pricing-label{
+            display:inline-block;
+            font-size:13px;
+            font-weight:700;
+            color:#2563eb;
+            background:#dbeafe;
+            padding:7px 12px;
+            border-radius:999px;
+            margin-bottom:14px;
+        }
+
+        .pricing-card h3{
+            font-size:28px;
+            margin-bottom:10px;
+        }
+
+        .price{
+            font-size:48px;
+            font-weight:800;
+            color:#2563eb;
+            margin-bottom:14px;
+        }
+
+        .price span{
+            font-size:18px;
+            font-weight:500;
+            color:#64748b;
+        }
+
+        .pricing-card p{
+            color:#475569;
+            margin-bottom:18px;
+        }
+
+        .pricing-card ul{
+            list-style:none;
+            margin-bottom:24px;
+            padding-left:0;
+        }
+
+        .pricing-card ul li{
+            margin-bottom:10px;
+            color:#334155;
+        }
+
+        .features{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:22px;
+        }
+
+        .feature-card{
+            background:white;
+            border:1px solid #e2e8f0;
+            border-radius:20px;
+            padding:26px 22px;
+            box-shadow:0 10px 24px rgba(0,0,0,0.04);
+        }
+
+        .feature-card h3{
+            font-size:20px;
+            margin-bottom:10px;
+        }
+
+        .feature-card p{
+            color:#64748b;
+            font-size:15px;
+        }
+
+        .demo-wrap{
+            background:white;
+            border:1px solid #e2e8f0;
+            border-radius:24px;
+            padding:24px;
+            box-shadow:0 15px 40px rgba(0,0,0,0.05);
+        }
+
+        .demo-video{
+            border-radius:18px;
+            overflow:hidden;
+            background:#0f172a;
+        }
+
+        .demo-video iframe{
+            width:100%;
+            height:520px;
+            border:none;
+            display:block;
+        }
+
+        .content-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:24px;
+        }
+
+        .content-box{
+            background:white;
+            border:1px solid #e2e8f0;
+            border-radius:20px;
+            padding:28px;
+            box-shadow:0 10px 24px rgba(0,0,0,0.04);
+        }
+
+        .content-box h3{
+            color:#2563eb;
+            font-size:28px;
+            margin-bottom:12px;
+        }
+
+        .content-box p{
+            color:#475569;
+            font-size:16px;
+        }
+
+        .faq-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:22px;
+        }
+
+        .faq-item{
+            background:white;
+            border:1px solid #e2e8f0;
+            border-radius:18px;
+            padding:22px;
+            box-shadow:0 8px 22px rgba(0,0,0,0.04);
+        }
+
+        .faq-item h4{
+            font-size:20px;
+            margin-bottom:10px;
+            color:#0f172a;
+        }
+
+        .faq-item p{
+            color:#64748b;
+            font-size:15px;
+        }
+
+        .cta{
+            background:linear-gradient(135deg,#2563eb,#1d4ed8);
+            color:white;
+            border-radius:30px;
+            padding:55px 30px;
+            text-align:center;
+            margin:20px 0 80px;
+        }
+
+        .cta h2{
+            font-size:42px;
+            margin-bottom:14px;
+        }
+
+        .cta p{
+            font-size:18px;
+            max-width:720px;
+            margin:0 auto 24px;
+            opacity:0.95;
+        }
+
+        .cta .btn{
+            background:white;
+            color:#2563eb;
+        }
+
+        .footer{
+            background:#0f172a;
+            color:#cbd5e1;
+            padding:50px 0 30px;
+            margin-top:20px;
+        }
+
+        .footer-grid{
+            display:grid;
+            grid-template-columns:2fr 1fr 1fr;
+            gap:28px;
+            margin-bottom:24px;
+        }
+
+        .footer h4{
+            color:white;
+            margin-bottom:12px;
+            font-size:18px;
+        }
+
+        .footer p,
+        .footer a{
+            color:#cbd5e1;
+            font-size:15px;
+        }
+
+        .footer a{
+            display:block;
+            margin-bottom:8px;
+        }
+
+        .footer-bottom{
+            border-top:1px solid rgba(255,255,255,0.1);
+            padding-top:20px;
+            text-align:center;
+            font-size:14px;
+            color:#94a3b8;
+        }
+
+        @media(max-width:992px){
+            .hero-grid,
+            .pricing-grid,
+            .features,
+            .content-grid,
+            .faq-grid,
+            .footer-grid{
+                grid-template-columns:1fr;
+            }
+
+            .hero h1{
+                font-size:40px;
+            }
+
+            .section-title h2{
+                font-size:32px;
+            }
+
+            .demo-video iframe{
+                height:240px;
+            }
+
+            .nav-inner{
+                flex-direction:column;
+                gap:14px;
+            }
+
+            .hero-buttons{
+                width:100%;
+            }
+
+            .hero-points{
+                grid-template-columns:1fr;
+            }
+
+            .cta h2{
+                font-size:32px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<nav class="navbar">
-<div class="container nav-inner">
-<div class="brand">
-<img src="{% static 'logo/laskora-main.png' %}" alt="Laskora">
-</div>
-<div class="nav-actions">
-<a href="/login/" class="btn">Login</a>
-</div>
-</div>
-</nav>
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <div class="brand">
+                <img src="{% static 'logo/laskora-main.png' %}" alt="Laskora Logo">
+            </div>
 
-<section class="hero">
-<div class="container hero-grid">
-<div>
-<h1>Professional invoicing made simple.</h1>
-<p>Create invoices, manage clients, and track billing easily with Laskora. Start with a 7-day free trial, no credit card required.</p>
+            <div class="nav-links">
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#demo" class="nav-link">Demo</a>
+                <a href="/login/" class="btn btn-outline">Login</a>
+            </div>
+        </div>
+    </nav>
 
-<div class="hero-buttons">
-<a href="/signup/" class="btn btn-primary">Create Account</a>
-<a href="/signup/" class="btn btn-secondary">Start 7-Day Free Trial</a>
-<a href="#demo" class="btn btn-outline">Watch Demo</a>
-</div>
-</div>
+    <section class="hero">
+        <div class="container hero-grid">
+            <div>
+                <span class="badge">7-Day Free Trial</span>
+                <h1>Professional invoicing made simple.</h1>
+                <p>
+                    Laskora helps freelancers and small businesses create invoices, manage clients,
+                    and send professional billing documents from one simple platform.
+                </p>
 
-<div class="hero-card">
-<h3>Invoice Preview</h3>
-<div class="line w60"></div>
-<div class="line w40"></div>
-<div class="line w100"></div>
-<div class="line w100"></div>
-<div class="line w80"></div>
-<div class="summary">
-<p>Subtotal: €200.00</p>
-<p>VAT: €51.00</p>
-<p><strong>Total: €251.00</strong></p>
-</div>
-</div>
-</div>
-</section>
+                <div class="hero-buttons">
+                    <a href="/signup/" class="btn btn-primary">Create Account</a>
+                    <a href="/signup/" class="btn btn-secondary">Start 7-Day Free Trial</a>
+                    <a href="#demo" class="btn btn-outline">Watch Demo</a>
+                </div>
 
-<section class="section">
-<div class="container">
-<div class="section-title">
-<h2>Simple pricing</h2>
-<p>Choose the billing model that fits your business.</p>
-</div>
+                <div class="hero-points">
+                    <div>✓ Monthly plan only 8 €</div>
+                    <div>✓ Single invoice only 1 €</div>
+                    <div>✓ Manage clients easily</div>
+                    <div>✓ Use from phone or laptop</div>
+                </div>
+            </div>
 
-<div class="pricing-grid">
-<div class="pricing-card featured">
-<h3>Monthly Plan</h3>
-<div class="price">8 € <span>/ month</span></div>
-<p>Best for freelancers and businesses that send invoices regularly.</p>
-<ul>
-<li>✓ Unlimited access to the platform</li>
-<li>✓ Manage clients and invoices</li>
-<li>✓ Simple and professional workflow</li>
-</ul>
-</div>
+            <div class="hero-card">
+                <div class="hero-card-top">
+                    <h3>Invoice Preview</h3>
+                    <span class="paid-badge">Paid</span>
+                </div>
 
-<div class="pricing-card">
-<h3>Pay Per Invoice</h3>
-<div class="price">1 € <span>/ invoice</span></div>
-<p>Perfect if you send only a few invoices and want maximum flexibility.</p>
-<ul>
-<li>✓ Pay only when you create an invoice</li>
-<li>✓ No monthly commitment</li>
-<li>✓ Good for occasional billing</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
+                <div class="invoice-preview">
+                    <div class="line w60"></div>
+                    <div class="line w40"></div>
+                    <div class="line w100"></div>
+                    <div class="line w100"></div>
+                    <div class="line w80"></div>
 
-<section class="section">
-<div class="container">
-<div class="section-title">
-<h2>Everything you need to manage invoices</h2>
-<p>A clean and modern invoicing system designed for speed and clarity.</p>
-</div>
+                    <div class="summary-box">
+                        <p>Subtotal: €200.00</p>
+                        <p>VAT: €51.00</p>
+                        <p><strong>Total: €251.00</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="features">
-<div class="feature">
-<h3>Create invoices</h3>
-<p>Generate clear and professional invoices quickly.</p>
-</div>
-<div class="feature">
-<h3>Manage clients</h3>
-<p>Store customer details and prepare invoices faster.</p>
-</div>
-<div class="feature">
-<h3>Download PDF</h3>
-<p>Prepare invoice documents ready to save and share.</p>
-</div>
-<div class="feature">
-<h3>Access anywhere</h3>
-<p>Use Laskora from laptop, desktop, or mobile browser.</p>
-</div>
-</div>
-</div>
-</section>
+    <section class="section" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Simple pricing</h2>
+                <p>Choose the billing model that fits your business best.</p>
+            </div>
 
-<section class="section" id="demo">
-<div class="container">
-<div class="section-title">
-<h2>See how Laskora works</h2>
-<p>Watch a short demo explaining the platform.</p>
-</div>
+            <div class="pricing-grid">
+                <div class="pricing-card featured">
+                    <span class="pricing-label">Most Popular</span>
+                    <h3>Monthly Plan</h3>
+                    <div class="price">8 € <span>/ month</span></div>
+                    <p>Best for freelancers and businesses that send invoices regularly.</p>
+                    <ul>
+                        <li>✓ Unlimited access to the platform</li>
+                        <li>✓ Manage clients and invoices</li>
+                        <li>✓ Simple and professional workflow</li>
+                        <li>✓ Better value for regular billing</li>
+                    </ul>
+                    <a href="/signup/" class="btn btn-primary">Start Monthly Plan</a>
+                </div>
 
-<div class="demo-box">
-<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Laskora demo" allowfullscreen></iframe>
-</div>
-</div>
-</section>
+                <div class="pricing-card">
+                    <h3>Pay Per Invoice</h3>
+                    <div class="price">1 € <span>/ invoice</span></div>
+                    <p>Perfect if you send only a few invoices and want maximum flexibility.</p>
+                    <ul>
+                        <li>✓ Pay only when you create an invoice</li>
+                        <li>✓ No monthly commitment</li>
+                        <li>✓ Great for occasional billing</li>
+                        <li>✓ Simple and flexible usage</li>
+                    </ul>
+                    <a href="/signup/" class="btn btn-outline">Create Account</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<footer class="footer">
-<div class="container">
-<div class="footer-grid">
-<div>
-<h4>Laskora</h4>
-<p>Smart invoicing platform for freelancers and small businesses.</p>
-</div>
-<div>
-<h4>Pages</h4>
-<a href="/">Home</a>
-<a href="/login/">Login</a>
-<a href="/signup/">Sign up</a>
-</div>
-<div>
-<h4>Contact</h4>
-<p>support@laskora.com</p>
-<p>Available online</p>
-</div>
-</div>
+    <section class="section" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Everything you need to manage invoices</h2>
+                <p>A clean and modern invoicing system designed for speed, clarity, and professional billing.</p>
+            </div>
 
-<div class="footer-bottom">
-© 2026 Laskora. All rights reserved.
-</div>
-</div>
-</footer>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Create invoices</h3>
+                    <p>Generate clean and professional invoices quickly with a simple workflow.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Manage clients</h3>
+                    <p>Keep customer information organized and ready every time.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Download PDF</h3>
+                    <p>Prepare invoice documents in a format ready to save and share.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Access anywhere</h3>
+                    <p>Use Laskora from your mobile, laptop, or desktop browser.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="demo">
+        <div class="container">
+            <div class="section-title">
+                <h2>See how Laskora works</h2>
+                <p>Watch a short introduction explaining how the platform helps you manage billing.</p>
+            </div>
+
+            <div class="demo-wrap">
+                <div class="demo-video">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Laskora demo" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why businesses choose Laskora</h2>
+                <p>Simple enough for solo freelancers, strong enough for growing businesses.</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-box">
+                    <h3>Simple</h3>
+                    <p>
+                        Laskora removes unnecessary complexity and gives you a fast invoicing workflow
+                        that feels modern, clean, and easy to understand.
+                    </p>
+                </div>
+
+                <div class="content-box">
+                    <h3>Professional</h3>
+                    <p>
+                        Present your business better with cleaner invoices, organized client records,
+                        and a more professional billing experience.
+                    </p>
+                </div>
+
+                <div class="content-box">
+                    <h3>Flexible</h3>
+                    <p>
+                        Use it anywhere, create invoices any time, and manage your workflow whether you
+                        work alone or plan to grow later.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently asked questions</h2>
+                <p>Quick answers to the most important questions new users usually ask.</p>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>Is there a free trial?</h4>
+                    <p>Yes. You can start with a 7-day free trial before deciding which billing model suits you best.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Can I use it on mobile?</h4>
+                    <p>Yes. Laskora works in the browser, so you can use it from mobile, tablet, or computer.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>What is the monthly price?</h4>
+                    <p>The monthly plan costs 8 € and is ideal for regular invoicing and ongoing business use.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>What if I only need a few invoices?</h4>
+                    <p>You can use the pay-per-invoice model and pay only 1 € for each invoice you create.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="cta">
+            <h2>Start using Laskora today</h2>
+            <p>Create your account, manage your clients, and send professional invoices from one place.</p>
+            <a href="/signup/" class="btn">Create Account</a>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>Laskora</h4>
+                    <p>Smart invoicing platform for freelancers, consultants, and small businesses.</p>
+                </div>
+
+                <div>
+                    <h4>Pages</h4>
+                    <a href="/">Home</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#features">Features</a>
+                    <a href="/login/">Login</a>
+                </div>
+
+                <div>
+                    <h4>Contact</h4>
+                    <p>support@laskora.com</p>
+                    <p>Available online</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                © 2026 Laskora. All rights reserved.
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
