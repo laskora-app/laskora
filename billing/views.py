@@ -150,50 +150,50 @@ def create_invoice_page(request):
     clients = Client.objects.all()
 
     if request.method == "POST":
-       company_name = request.POST.get("company_name", "").strip()
-       person_name = request.POST.get("person_name", "").strip()
-       customer_email = request.POST.get("customer_email", "").strip()
+        company_name = request.POST.get("company_name", "").strip()
+        person_name = request.POST.get("person_name", "").strip()
+        customer_email = request.POST.get("customer_email", "").strip()
 
-       invoice_number = request.POST.get("invoice_number")
-       issue_date = request.POST.get("invoice_date")
-       due_date = request.POST.get("due_date")
+        invoice_number = request.POST.get("invoice_number")
+        issue_date = request.POST.get("invoice_date")
+        due_date = request.POST.get("due_date")
 
-       quantity_list = request.POST.getlist("quantity[]")
-       unit_price_list = request.POST.getlist("unit_price[]")
-       vat_rate_list = request.POST.getlist("vat_rate[]")
-       discount_list = request.POST.getlist("discount[]")
+        quantity_list = request.POST.getlist("quantity[]")
+        unit_price_list = request.POST.getlist("unit_price[]")
+        vat_rate_list = request.POST.getlist("vat_rate[]")
+        discount_list = request.POST.getlist("discount[]")
 
-       client_name = company_name if company_name else person_name
+        client_name = company_name if company_name else person_name
 
-       if not client_name:
-        return HttpResponse("Client name is required")
+        if not client_name:
+            return HttpResponse("Client name is required")
 
-    client, created = Client.objects.get_or_create(
-    owner=request.user,
-    name=client_name,
-    defaults={"email": customer_email if customer_email else None}
+        client, created = Client.objects.get_or_create(
+            owner=request.user,
+            name=client_name,
+            defaults={"email": customer_email if customer_email else None}
 )
 
-    if customer_email and not client.email:
-        client.email = customer_email
-        client.save()
+        if customer_email and not client.email:
+            client.email = customer_email
+            client.save()
 
-    work_hours = float(quantity_list[0]) if quantity_list and quantity_list[0] else 0
-    hourly_rate = float(unit_price_list[0]) if unit_price_list and unit_price_list[0] else 0
-    vat_rate = float(vat_rate_list[0]) if vat_rate_list and vat_rate_list[0] else 0
-    discount = float(discount_list[0]) if discount_list and discount_list[0] else 0
+        work_hours = float(quantity_list[0]) if quantity_list and quantity_list[0] else 0
+        hourly_rate = float(unit_price_list[0]) if unit_price_list and unit_price_list[0] else 0
+        vat_rate = float(vat_rate_list[0]) if vat_rate_list and vat_rate_list[0] else 0
+        discount = float(discount_list[0]) if discount_list and discount_list[0] else 0
 
-    subtotal = work_hours * hourly_rate
-    subtotal = subtotal - (subtotal * discount / 100)
+        subtotal = work_hours * hourly_rate
+        subtotal = subtotal - (subtotal * discount / 100)
 
-    total = float(subtotal) if subtotal else 0
-    if total == 0:
+        total = float(subtotal) if subtotal else 0
+        if total == 0:
             total = float(work_hours) * float(hourly_rate)
 
-    vat_amount = total * (float(vat_rate) / 100)
-    total_with_vat = total + vat_amount
+        vat_amount = total * (float(vat_rate) / 100)
+        total_with_vat = total + vat_amount
 
-    Invoice.objects.create(
+        Invoice.objects.create(
             owner=request.user,
             client=client,
             invoice_number=invoice_number,
@@ -206,7 +206,7 @@ def create_invoice_page(request):
             total=total_with_vat,
         )
 
-    return redirect("/invoices/")
+        return redirect("/invoices/")
 
     return render(request, "billing/create_invoice.html", {"clients": clients})
 @login_required
