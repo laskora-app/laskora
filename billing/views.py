@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.conf import settings
 
 
 COMPANY_NAME = "Laskora"
@@ -117,9 +118,14 @@ def invoice_pdf(request, invoice_id):
 
 @login_required
 def send_invoice_email(request, invoice_id):
-    invoice = Invoice.objects.get(id=invoice_id)
+
+    invoice = Invoice.objects.get(id=invoice_id, owner=request.user)
+
+    if not invoice.client.email:
+        return HttpResponse("Client has no email address.")
 
     response = HttpResponse(content_type='application/pdf')
+
     p = canvas.Canvas(response)
     draw_invoice_pdf(p, invoice)
     p.showPage()
@@ -130,7 +136,7 @@ def send_invoice_email(request, invoice_id):
     email = EmailMessage(
         subject=f"Invoice {invoice.invoice_number}",
         body="Please find your invoice attached.",
-        from_email=None,
+        from_email=settings.DEFAULT_FROM_EMAIL,
         to=[invoice.client.email],
     )
 
@@ -142,7 +148,7 @@ def send_invoice_email(request, invoice_id):
 
     email.send()
 
-    return HttpResponse("Invoice email sent successfully.")
+    return redirect("/invoices/")
 from django.shortcuts import render, redirect
 from .models import Client, Invoice
 @login_required
@@ -210,7 +216,9 @@ def create_invoice_page(request):
         if action == "send":
              return redirect(f"/invoice/{invoice.id}/send/")
 
-        return redirect("/invoices/")
+        return redirect("/invoices/") 
+    
+    return render(request, "billing/create_invoice.html", {"clients": clients})
 @login_required
 def dashboard(request):
     invoices = Invoice.objects.all().order_by('-id')[:5]
