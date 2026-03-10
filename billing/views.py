@@ -150,6 +150,7 @@ def create_invoice_page(request):
     clients = Client.objects.all()
 
     if request.method == "POST":
+        action = request.POST.get("action")
         company_name = request.POST.get("company_name", "").strip()
         person_name = request.POST.get("person_name", "").strip()
         customer_email = request.POST.get("customer_email", "").strip()
@@ -193,7 +194,7 @@ def create_invoice_page(request):
         vat_amount = total * (float(vat_rate) / 100)
         total_with_vat = total + vat_amount
 
-        Invoice.objects.create(
+        invoice = Invoice.objects.create(
             owner=request.user,
             client=client,
             invoice_number=invoice_number,
@@ -206,9 +207,10 @@ def create_invoice_page(request):
             total=total_with_vat,
         )
 
-        return redirect("/invoices/")
+        if action == "send":
+             return redirect(f"/invoice/{invoice.id}/send/")
 
-    return render(request, "billing/create_invoice.html", {"clients": clients})
+        return redirect("/invoices/")
 @login_required
 def dashboard(request):
     invoices = Invoice.objects.all().order_by('-id')[:5]
