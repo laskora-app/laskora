@@ -146,7 +146,7 @@ def send_invoice_email(request, invoice_id):
         "application/pdf"
     )
 
-    email.send()
+    email.send(fail_silently=False)
 
     return redirect("/invoices/")
 from django.shortcuts import render, redirect
