@@ -145,7 +145,11 @@ def send_invoice_email(request, invoice_id):
         pdf_file,
         "application/pdf"
     )
-
+    print("EMAIL_HOST_USER =", settings.EMAIL_HOST_USER)
+    print("EMAIL_HOST_PASSWORD exists =", bool(settings.EMAIL_HOST_PASSWORD))
+    print("DEFAULT_FROM_EMAIL =", settings.DEFAULT_FROM_EMAIL)
+    print("CLIENT EMAIL =", invoice.client.email)
+    
     email.send()
 
     return redirect("/invoices/")
