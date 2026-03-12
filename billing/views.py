@@ -135,7 +135,7 @@ def send_invoice_email(request, invoice_id):
 
     resend.Emails.send({
         "from": f"Laskora <onboarding@resend.dev>",
-        "to": [invoice.client.email],
+        "to": ["laskora.invoicegmail.com"]
         "subject": f"Invoice {invoice.invoice_number}",
         "html": "<p>Please find your invoice attached.</p>",
         "attachments": [
