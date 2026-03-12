@@ -1,5 +1,4 @@
 from django.http import HttpResponse
-from django.core.mail import EmailMessage
 from reportlab.pdfgen import canvas
 from reportlab.lib.colors import HexColor
 from .models import Invoice
@@ -135,7 +134,7 @@ def send_invoice_email(request, invoice_id):
     resend.api_key = settings.RESEND_API_KEY
 
     resend.Emails.send({
-        "from": f"Laskora <{settings.DEFAULT_FROM_EMAIL}>",
+        "from": f"Laskora <onboarding@resend.dev>",
         "to": [invoice.client.email],
         "subject": f"Invoice {invoice.invoice_number}",
         "html": "<p>Please find your invoice attached.</p>",
