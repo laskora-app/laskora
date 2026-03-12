@@ -103,20 +103,6 @@ def draw_invoice_pdf(p, invoice):
     p.drawString(50, 85, "Laskora - Simple invoicing for modern businesses.")
 
 @login_required
-def invoice_pdf(request, invoice_id):
-    invoice = Invoice.objects.get(id=invoice_id)
-
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="invoice_{invoice.id}.pdf"'
-
-    p = canvas.Canvas(response)
-    draw_invoice_pdf(p, invoice)
-    p.showPage()
-    p.save()
-
-    return response
-
-@login_required
 def send_invoice_email(request, invoice_id):
     invoice = Invoice.objects.get(id=invoice_id, owner=request.user)
 
@@ -130,23 +116,26 @@ def send_invoice_email(request, invoice_id):
     p.save()
 
     pdf_file = response.content
-
     resend.api_key = settings.RESEND_API_KEY
 
-    resend.Emails.send({
-        "from": f"Laskora <onboarding@resend.dev>",
-        "to": ["laskora.invoice@gmail.com"],
-        "subject": f"Invoice {invoice.invoice_number}",
-        "html": "<p>Please find your invoice attached.</p>",
-        "attachments": [
-            {
-                "filename": f"invoice_{invoice.invoice_number}.pdf",
-                "content": base64.b64encode(pdf_file).decode("utf-8"),
-            }
-        ],
-    })
+    try:
+        resend.Emails.send({
+            "from": "Laskora <onboarding@resend.dev>",
+            "to": ["laskora.invoice@gmail.com"],
+            "subject": f"Invoice {invoice.invoice_number}",
+            "html": "<p>Please find your invoice attached.</p>",
+            "attachments": [
+                {
+                    "filename": f"invoice_{invoice.invoice_number}.pdf",
+                    "content": base64.b64encode(pdf_file).decode("utf-8"),
+                }
+            ],
+        })
+    except Exception as e:
+        print(e)
 
     return redirect("/invoices/")
+
 from django.shortcuts import render, redirect
 from .models import Client, Invoice
 @login_required
@@ -303,3 +292,17 @@ def logout_view(request):
     return redirect('/login/')
 def home_page(request):
     return render(request, 'billing/home.html')
+
+@login_required
+def invoice_pdf(request, invoice_id):
+    invoice = Invoice.objects.get(id=invoice_id, owner=request.user)
+
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f'inline; filename="invoice_{invoice.invoice_number}.pdf"'
+
+    p = canvas.Canvas(response)
+    draw_invoice_pdf(p, invoice)
+    p.showPage()
+    p.save()
+
+    return response
