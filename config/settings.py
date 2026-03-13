@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -121,11 +122,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "billing" / "static",
 ]
-import os
 
-RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
+MAILERLITE_API_KEY = os.environ.get("MAILERLITE_API_KEY")
+DEFAULT_FROM_EMAIL = "laskora.invoice@gmail.com" 
 
-DEFAULT_FROM_EMAIL = "onboarding@resend.dev"
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/dashboard/"
 LOGOUT_REDIRECT_URL = "/login/"

@@ -7,8 +7,6 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.conf import settings
-import base64
-import resend
 
 COMPANY_NAME = "Laskora"
 COMPANY_BUSINESS_ID = "1234567-8"
@@ -116,23 +114,23 @@ def send_invoice_email(request, invoice_id):
     p.save()
 
     pdf_file = response.content
-    resend.api_key = settings.RESEND_API_KEY
 
-    try:
-        resend.Emails.send({
-            "from": "Laskora <onboarding@resend.dev>",
-            "to": ["laskora.invoice@gmail.com"],
-            "subject": f"Invoice {invoice.invoice_number}",
-            "html": "<p>Please find your invoice attached.</p>",
-            "attachments": [
-                {
-                    "filename": f"invoice_{invoice.invoice_number}.pdf",
-                    "content": base64.b64encode(pdf_file).decode("utf-8"),
-                }
-            ],
-        })
-    except Exception as e:
-        print(e)
+    from django.core.mail import EmailMessage
+
+    email = EmailMessage(
+        subject=f"Invoice {invoice.invoice_number}",
+        body="Please find your invoice attached.",
+        from_email="laskora.invoice@gmail.com",
+        to=[invoice.client.email],
+    )
+
+    email.attach(
+        f"invoice_{invoice.invoice_number}.pdf",
+        pdf_file,
+        "application/pdf"
+    )
+
+    email.send()
 
     return redirect("/invoices/")
 
